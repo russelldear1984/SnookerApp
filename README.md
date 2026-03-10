@@ -15,7 +15,7 @@ A responsive Next.js App Router application based on the provided Stitch exports
 - Next.js 14 (App Router)
 - React 18
 - TypeScript
-- Tailwind CSS
+- Tailwind CSS 
 
 ## Setup
 ```bash
