@@ -59,4 +59,4 @@ If you want to build exactly like the workflow locally for a project site:
 ```bash
 NEXT_PUBLIC_BASE_PATH=/SnookerApp npm run build
 ```
-
+Test build trigger
