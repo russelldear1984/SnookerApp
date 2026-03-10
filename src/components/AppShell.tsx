@@ -7,7 +7,7 @@ const links = [
   { href: '/', label: 'Home' },
   { href: '/schedule', label: 'Bookings' },
   { href: '/standings/singles', label: 'Standings' },
-  { href: '/knockout', label: 'Knockout' },
+  { href: '/knockout', label: 'Bracket' },
   { href: '/members', label: 'Members' }
 ];
 
@@ -21,14 +21,11 @@ export function AppShell({ title, children }: { title: string; children: React.R
       <main className="space-y-4 p-4">{children}</main>
       <nav className="fixed bottom-0 left-0 right-0 border-t border-slate-200 bg-white">
         <div className="mx-auto grid max-w-3xl grid-cols-5">
-          {links.map((l) => {
-            const active = pathname === l.href || (l.href === '/standings/singles' && pathname.startsWith('/standings'));
-            return (
-              <Link key={l.href} href={l.href} className={`p-3 text-center text-sm font-semibold ${active ? 'text-brand-500' : 'text-slate-400'}`}>
-                {l.label}
-              </Link>
-            );
-          })}
+          {links.map((l) => (
+            <Link key={l.href} href={l.href} className={`p-3 text-center text-sm font-semibold ${pathname === l.href ? 'text-brand-500' : 'text-slate-400'}`}>
+              {l.label}
+            </Link>
+          ))}
         </div>
       </nav>
     </div>

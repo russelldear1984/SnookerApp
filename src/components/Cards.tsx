@@ -4,16 +4,12 @@ export function SectionTitle({ title, right }: { title: string; right?: React.Re
   return <div className="flex items-center justify-between"><h2 className="text-xl font-bold">{title}</h2>{right}</div>;
 }
 
-export function BookingCard({ booking, nameOf }: { booking: Booking; nameOf: (id: string) => string }) {
+export function BookingCard({ booking }: { booking: Booking }) {
   return (
     <div className="card p-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-bold text-brand-700">{booking.type.replaceAll('_', ' ')}</p>
-        <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{booking.status}</span>
-      </div>
-      <p className="mt-1 text-2xl font-semibold">{booking.startTime} - {booking.endTime}</p>
+      <div className="flex items-center justify-between"><p className="text-sm font-bold text-brand-700">{booking.type.replaceAll('_', ' ')}</p><span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold">{booking.status}</span></div>
+      <p className="mt-1 text-3xl font-semibold">{booking.startTime} - {booking.endTime}</p>
       <p className="text-slate-500">{booking.date}</p>
-      <p className="mt-2 font-semibold">{nameOf(booking.participantIds[0])} vs {nameOf(booking.participantIds[1])}</p>
     </div>
   );
 }
