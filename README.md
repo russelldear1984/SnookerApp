@@ -1,5 +1,4 @@
-# Gamlingay Social Club Snooker Booking & Tournament Manager
-
+# Gamlingay Social
 A responsive Next.js App Router application based on the provided Stitch exports.
 
 ## Features
@@ -60,3 +59,4 @@ If you want to build exactly like the workflow locally for a project site:
 ```bash
 NEXT_PUBLIC_BASE_PATH=/SnookerApp npm run build
 ```
+
