@@ -46,8 +46,11 @@ jobs:
           NEXT_PUBLIC_BASE_PATH: ${{ steps.base_path.outputs.value }}
         run: npm run build
 
+      - name: Verify export output exists
+        run: ls -la out
+
       - name: Ensure no Jekyll processing
-        run: mkdir -p out && touch out/.nojekyll
+        run: touch out/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
