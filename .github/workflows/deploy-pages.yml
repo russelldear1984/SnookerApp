@@ -47,7 +47,7 @@ jobs:
         run: npm run build
 
       - name: Ensure no Jekyll processing
-        run: touch out/.nojekyll
+        run: mkdir -p out && touch out/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
