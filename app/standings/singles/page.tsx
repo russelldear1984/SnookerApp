@@ -4,14 +4,23 @@ import { AppShell } from '@/components/AppShell';
 import { SectionTitle, StandingsTable } from '@/components/Cards';
 import { useAppState } from '@/state/AppStateContext';
 
-export default function SinglesStandingsPage() {
-  const { state } = useAppState();
+export default function StandingsPage() {
+  const { state, getEntryName } = useAppState();
+  const groups = Object.keys(state.standingsByGroup);
+
   return (
-    <AppShell title="Singles League Table">
-      <SectionTitle title="Summer Pro Open" right={<span className="rounded bg-brand-500 px-2 py-1 text-white">LIVE</span>} />
-      <StandingsTable rows={state.singlesStandings} nameOf={(id) => state.players.find((p)=>p.id===id)?.name ?? id} />
-      <SectionTitle title="Tournament High Breaks" />
-      <div className="card p-4">{[...state.players].sort((a,b)=>b.highestBreak-a.highestBreak).slice(0,5).map((p)=><p key={p.id} className="py-1 font-medium">{p.name} <span className="float-right text-brand-700">{p.highestBreak}</span></p>)}</div>
+    <AppShell title="Tournament Standings">
+      <div className="card p-4">
+        <p className="text-3xl font-bold">{state.activeTournament.name}</p>
+        <p className="text-slate-500">Active Tournament • {state.activeTournament.type}</p>
+      </div>
+
+      {groups.map((group) => (
+        <div key={group} className="space-y-2">
+          <SectionTitle title={groups.length > 1 ? `Group ${group}` : 'Standings'} />
+          <StandingsTable rows={state.standingsByGroup[group]} nameOf={getEntryName} />
+        </div>
+      ))}
     </AppShell>
   );
 }

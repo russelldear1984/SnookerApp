@@ -5,7 +5,7 @@ export type TournamentType = 'SINGLES' | 'DOUBLES';
 export type Stage = 'GROUP' | 'SEMI' | 'FINAL';
 
 export interface Player { id: ID; name: string; avatar?: string; wins: number; losses: number; highestBreak: number; }
-export interface DoublesTeam { id: ID; name: string; playerIds: [ID, ID]; group: 'A' | 'B'; }
+export interface DoublesTeam { id: ID; name: string; playerIds: [ID, ID]; group: string; }
 
 export interface Booking {
   id: ID;
@@ -14,15 +14,16 @@ export interface Booking {
   endTime: string;
   type: BookingType;
   status: BookingStatus;
-  participantIds: ID[];
+  participantIds: [ID, ID];
   notes?: string;
 }
 
-export interface Tournament {
+export interface ActiveTournament {
   id: ID;
   name: string;
   type: TournamentType;
-  active: boolean;
+  groups: string[];
+  participantIds: ID[];
 }
 
 export interface MatchResult {
@@ -36,7 +37,7 @@ export interface Match {
   id: ID;
   tournamentId: ID;
   stage: Stage;
-  group?: 'A' | 'B';
+  group?: string;
   side1Id: ID;
   side2Id: ID;
   type: TournamentType;
@@ -52,7 +53,6 @@ export interface StandingsRow {
   scoreDiff: number;
   rank: number;
   qualified?: boolean;
-  inPosition?: boolean;
 }
 
 export interface KnockoutMatch {
@@ -67,10 +67,8 @@ export interface AppState {
   players: Player[];
   teams: DoublesTeam[];
   bookings: Booking[];
-  tournaments: Tournament[];
+  activeTournament: ActiveTournament;
   matches: Match[];
-  singlesStandings: StandingsRow[];
-  doublesStandingsA: StandingsRow[];
-  doublesStandingsB: StandingsRow[];
+  standingsByGroup: Record<string, StandingsRow[]>;
   knockout: KnockoutMatch[];
 }
